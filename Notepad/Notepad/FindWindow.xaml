@@ -1,0 +1,23 @@
+﻿<Window x:Class="Notepad.FindWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notepad"
+        mc:Ignorable="d"
+        Title="Find" Height="220.114" Width="376.514">
+   
+    <Grid Margin="0,-13,-6.2,-19.8">
+        <Grid HorizontalAlignment="Center" Margin="10,37,10,34" Width="347">
+            <Label Content="Find:  " FontSize="16" VerticalAlignment="Center" Height="122" Margin="0,28,0,2.2"/>
+            <TextBox FontSize="16" Height="28" x:Name="textBox" VerticalAlignment="Center" Margin="42,10,25,79"/>
+            
+            <Button Content="Find Next" Tag="next"  Height="22"  VerticalAlignment="Center" Margin="186,52,25,43"
+                    Click="Find_Click"/>
+            <Button Content="Find Previous" Tag="previous" Height="22"  VerticalAlignment="Center"  Margin="42,52,175,43"
+                    Click="Find_Click"/>
+        </Grid>
+        
+        <CheckBox Content="All files" x:Name="allFiles" HorizontalAlignment="Left" Margin="155,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.475,1.947"/>
+    </Grid>
+</Window>
