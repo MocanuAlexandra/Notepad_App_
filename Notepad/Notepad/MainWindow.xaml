@@ -21,6 +21,7 @@
         <KeyBinding Key="T" Modifiers="Control" Command ="{Binding CloseFileCommand}"/>
         <KeyBinding Key="E" Modifiers="Control" Command="{Binding ExitCommand}"/>
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FindCommand}"/>
+        <KeyBinding Key="R" Modifiers="Control" Command="{Binding ReplaceCommand}"/>
     </Window.InputBindings>
 
     <DockPanel Margin="1" Background="LightGray">
@@ -43,8 +44,8 @@
 
             <MenuItem Header="Search">
                 <MenuItem Header="Find" InputGestureText="Ctrl+F" Command="{Binding FindCommand}"/>
-                <MenuItem Header="Replace" InputGestureText="Ctrl+R" />
-                <MenuItem Header="Replace All" InputGestureText="Ctrl+Shift+R" />
+                <MenuItem Header="Replace" InputGestureText="Ctrl+R" Command="{Binding ReplaceCommand}"/>
+                <MenuItem Header="Replace All" InputGestureText="Ctrl+R" Command="{Binding ReplaceCommand}"/>
             </MenuItem>
 
             <MenuItem Header="Edit">
@@ -54,7 +55,7 @@
             </MenuItem>
 
             <MenuItem Header="Help" >
-                <MenuItem Header="About" Command="{Binding HelpCommand}"/>
+                <MenuItem Header="About" Command="{Binding AboutCommand}"/>
             </MenuItem>
         </Menu>
 

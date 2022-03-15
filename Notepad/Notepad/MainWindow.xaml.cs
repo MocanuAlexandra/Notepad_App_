@@ -97,7 +97,6 @@ namespace Notepad
                 ChangeTab(tabControl.SelectedIndex - 1);
         }
         #endregion
-
-       
+         
     }
 }

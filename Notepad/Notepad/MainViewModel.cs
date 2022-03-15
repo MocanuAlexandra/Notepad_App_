@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 
@@ -24,6 +25,7 @@ namespace Notepad.View_Models
 
         // Search Menu commands:
         public ICommand FindCommand { get; }
+        public ICommand ReplaceCommand { get; }
 
 
         // Edit Menu commands:
@@ -32,7 +34,7 @@ namespace Notepad.View_Models
 
 
         // About Menu commands:
-        public ICommand HelpCommand { get; }
+        public ICommand AboutCommand { get; }
 
 
         public ObservableCollection<FileModel> openFiles { get; set; } = new ObservableCollection<FileModel>();
@@ -48,11 +50,12 @@ namespace Notepad.View_Models
             ExitCommand = new RelayCommand(Exit);
 
             FindCommand = new RelayCommand(Find);
+            ReplaceCommand = new RelayCommand(Replace);
 
             CopyCommand = new RelayCommand(Copy);
             PasteCommand = new RelayCommand(Paste);
 
-            HelpCommand = new RelayCommand(DisplayAbout);
+            AboutCommand = new RelayCommand(DisplayAbout);
         }
 
         #region File Menu Events
@@ -96,8 +99,10 @@ namespace Notepad.View_Models
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "Text File (*.txt)|*.txt"
+                Filter = "Text File (*.txt)|*.txt",
+                Title = "Save Text File"
             };
+
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
 
             //checking if there is any file currently selected
@@ -142,12 +147,18 @@ namespace Notepad.View_Models
             FindWindow findWindow = new FindWindow();
             findWindow.Show();
         }
+
+        private void Replace()
+        {
+            ReplaceWindow replaceWindow = new ReplaceWindow();
+            replaceWindow.Show();
+        }
         #endregion
 
         #region Edit Menu Events
         private void Copy()
         {
-          
+
         }
         private void Paste()
         {
@@ -158,7 +169,7 @@ namespace Notepad.View_Models
         #region Help Menu Events
         private void DisplayAbout()
         {
-            AboutWindow aboutWindow = new AboutWindow(MainWindow.mainWindow);
+            AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.Show();
         }
         #endregion
