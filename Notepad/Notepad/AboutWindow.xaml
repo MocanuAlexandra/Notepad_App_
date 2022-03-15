@@ -5,5 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notepad"
         mc:Ignorable="d"
-        Title="About" Height="256.175" Width="480.12">
+        Title="About" Height="220.114" Width="376.514">
+
+    <Grid Margin="0,-13,-6.2,-19.8">
+        <Grid HorizontalAlignment="Center" Margin="10,37,10,34" Width="347">
+            <Label Content="&#x9;Mocanu Maria-Alexandra  &#xD;&#xA;&#x9;       Grupa 10LF302" FontSize="16" VerticalAlignment="Center" Height="122" Margin="28,20,35,10.2"/>
+            
+            <TextBlock  VerticalAlignment="Center" Margin="60,81,52,37.2" RenderTransformOrigin="0.5,0.5" Height="34" >        
+             <Hyperlink NavigateUri="mailto: maria-alexandra.mocanu@student.unitbv.ro" RequestNavigate="Send_Email">
+                maria-alexandra.mocanu@student.unitbv.ro
+             </Hyperlink>
+            </TextBlock>
+        </Grid>
+    </Grid>
 </Window>
