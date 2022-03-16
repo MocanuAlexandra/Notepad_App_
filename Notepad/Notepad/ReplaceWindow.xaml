@@ -21,7 +21,7 @@
             <Grid Margin="10, 0" />
         </StackPanel>
         <CheckBox Content="All files" x:Name="allFiles" HorizontalAlignment="Left" Margin="181,150,0,-0.2" />
-        <Button Content="Replace All"  Height="24"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="242,96,34.6,0" Click="ReplaceAll_Clicked"/>
+        <Button Content="Replace All"  x:Name="replaceAll" Height="24"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="242,96,34.6,0" Click="ReplaceAll_Clicked"/>
         <Button Content="Replace"  Height="24"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="103,96,168.6,0"  Click="Replace_Clicked"/>
     </Grid>
 </Window>

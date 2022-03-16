@@ -27,6 +27,8 @@ namespace Notepad.View_Models
         public ICommand FindCommand { get; }
         public ICommand ReplaceCommand { get; }
 
+        public ICommand ReplaceAllCommand { get; }
+
 
         // Edit Menu commands:
         public ICommand CopyCommand { get; }
@@ -51,6 +53,7 @@ namespace Notepad.View_Models
 
             FindCommand = new RelayCommand(Find);
             ReplaceCommand = new RelayCommand(Replace);
+            ReplaceAllCommand = new RelayCommand(ReplaceAll);
 
             CopyCommand = new RelayCommand(Copy);
             PasteCommand = new RelayCommand(Paste);
@@ -150,9 +153,16 @@ namespace Notepad.View_Models
 
         private void Replace()
         {
-            ReplaceWindow replaceWindow = new ReplaceWindow();
+            ReplaceWindow replaceWindow = new ReplaceWindow(false);
             replaceWindow.Show();
         }
+
+        private void ReplaceAll()
+        {
+            ReplaceWindow replaceWindow = new ReplaceWindow(true);
+            replaceWindow.Show();
+        }
+
         #endregion
 
         #region Edit Menu Events

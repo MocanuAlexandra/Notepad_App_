@@ -21,18 +21,20 @@ namespace Notepad
     /// </summary>
     public partial class ReplaceWindow : Window
     {
-        public ReplaceWindow()
+        public ReplaceWindow(bool replaceAllFunction)
         {
             InitializeComponent();
+            replaceAll.IsEnabled = replaceAllFunction;
         }
 
         #region Events
         private void Replace_Clicked(object sender, RoutedEventArgs e)
         {
+
             string textToBeReplaced, replacementText;
             textToBeReplaced = replaceTextBox.Text;
             replacementText = withTextBox.Text;
-
+          
             //check if strings are empty or there is no file open in tab
             if (textToBeReplaced == string.Empty || replacementText == string.Empty ||
                 MainWindow.mainVM.openFiles.Count == 0)
@@ -96,6 +98,7 @@ namespace Notepad
 
         private void ReplaceAll_Clicked(object sender, RoutedEventArgs e)
         {
+           
             string textToBeReplaced, replacementText;
             textToBeReplaced = replaceTextBox.Text;
             replacementText = withTextBox.Text;
