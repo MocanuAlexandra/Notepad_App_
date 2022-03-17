@@ -122,10 +122,39 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Some files\Machiavelli-ThePrince.txt" />
+    <Resource Include="Exemple files\alt text.txt" />
+    <Resource Include="Exemple files\ceva text.txt" />
+    <Resource Include="Exemple files\Machiavelli-ThePrince.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Some files\ceva text.txt" />
+    <Resource Include="Icons\about.png" />
+    <Resource Include="Icons\about_background.jpeg" />
+    <Resource Include="Icons\close.png" />
+    <Resource Include="Icons\copy.png" />
+    <Resource Include="Icons\cut.png" />
+    <Resource Include="Icons\exit.png" />
+    <Resource Include="Icons\find.png" />
+    <Resource Include="Icons\lowercase.png" />
+    <Resource Include="Icons\new.png" />
+    <Resource Include="Icons\notepad.png" />
+    <Resource Include="Icons\open.png" />
+    <Resource Include="Icons\paste.png" />
+    <Resource Include="Icons\redo.png" />
+    <Resource Include="Icons\remove_empty_lines.png" />
+    <Resource Include="Icons\save.png" />
+    <Resource Include="Icons\save_as.png" />
+    <Resource Include="Icons\select_all.png" />
+    <Resource Include="Icons\time_date.png" />
+    <Resource Include="Icons\undo.png" />
+    <Resource Include="Icons\uppercase.png" />
+    <Resource Include="Icons\zoom_in.png" />
+    <Resource Include="Icons\zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\replace_all.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

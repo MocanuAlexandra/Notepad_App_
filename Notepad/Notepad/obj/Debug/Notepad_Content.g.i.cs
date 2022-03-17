@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("some%20files/ceva%20text.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/replace_all.png")]
 
 

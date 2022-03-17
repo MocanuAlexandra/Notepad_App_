@@ -19,7 +19,7 @@
         <KeyBinding Key="S" Modifiers="Control" Command ="{Binding SaveFileCommand}"/>
         <KeyBinding Key="D" Modifiers="Control" Command ="{Binding SaveAsCommand}"/>
         <KeyBinding Key="E" Modifiers="Control" Command ="{Binding ExitCommand}"/>
-        
+
         <KeyBinding Key="F" Modifiers="Control" Command ="{Binding FindCommand}"/>
         <KeyBinding Key="R" Modifiers="Control" Command ="{Binding ReplaceCommand}"/>
         <KeyBinding Key="L" Modifiers="Control" Command="{Binding ReplaceAllCommand}"/>
@@ -35,33 +35,100 @@
         <Menu Height="20" DockPanel.Dock="Top" Background="LightGoldenrodYellow">
             <MenuItem Header="File" Height="20">
                 <MenuItem Header="New" InputGestureText="Ctrl+N" Command ="{Binding NewFileCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/new.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Open" InputGestureText="Ctrl+O" Command ="{Binding OpenCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/open.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Save" InputGestureText="Ctrl+S" Command ="{Binding SaveFileCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/save.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Save As" InputGestureText="Ctrl+D" Command ="{Binding SaveAsCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/save_as.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" InputGestureText="Ctrl+E" Command="{Binding ExitCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/exit.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Search">
-                <MenuItem Header="Find" InputGestureText="Ctrl+F" Command="{Binding FindCommand}"/>
-                <MenuItem Header="Replace" InputGestureText="Ctrl+R" Command="{Binding ReplaceCommand}"/>
-                <MenuItem Header="Replace All" InputGestureText="Ctrl+L" Command="{Binding ReplaceAllCommand}"/>
+                <MenuItem Header="Find" InputGestureText="Ctrl+F" Command="{Binding FindCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/find.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Replace" InputGestureText="Ctrl+R" Command="{Binding ReplaceCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/replace.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Replace All" InputGestureText="Ctrl+L" Command="{Binding ReplaceAllCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/replace_all.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Edit">
-                <MenuItem Header="Copy" InputGestureText="Ctrl+C"  Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=tabControl, Path=SelectedItem.SelectedTextFile}"/>
-                <MenuItem Header="Peste" InputGestureText="Ctrl+V" Command="{Binding PasteCommand}" CommandParameter="{Binding ElementName=tabControl, Path=SelectedItem.SelectedTextFile}"/>
-                <MenuItem Header="Cut" InputGestureText="Ctrl+X"   Command="{Binding CutCommand}"   CommandParameter="{Binding ElementName=tabControl, Path=SelectedItem.SelectedTextFile}"/>
+                <MenuItem Header="Copy" InputGestureText="Ctrl+C"  Command="{Binding CopyCommand}"
+                          CommandParameter="{Binding ElementName=tabControl,
+                                            Path=SelectedItem.SelectedTextFile}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/copy.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="Peste" InputGestureText="Ctrl+V" Command="{Binding PasteCommand}"
+                      CommandParameter="{Binding ElementName=tabControl,
+                                        Path=SelectedItem.SelectedTextFile}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/paste.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="Cut" InputGestureText="Ctrl+X" Command="{Binding CutCommand}" 
+                      CommandParameter="{Binding ElementName=tabControl,
+                                        Path=SelectedItem.SelectedTextFile}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/cut.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
+
+                <MenuItem Header="Convert Text to Lowercase" Command="{Binding LowercaseCommand}" 
+                      CommandParameter="{Binding ElementName=tabControl,
+                                        Path=SelectedItem.SelectedTextFile}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/lowercase.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="Convert Text to Uppercase" Command="{Binding UppercaseCommand}" 
+                      CommandParameter="{Binding ElementName=tabControl,
+                                        Path=SelectedItem.SelectedTextFile}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/uppercase.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Help" >
-                <MenuItem Header="About" InputGestureText="Ctrl+A" Command="{Binding AboutCommand}"/>
+                <MenuItem Header="About" InputGestureText="Ctrl+A" Command="{Binding AboutCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/about.png"/>
+                    </MenuItem.Icon> 
+                </MenuItem>
             </MenuItem>
         </Menu>
 
@@ -91,7 +158,7 @@
                              SelectionBrush="Black"
                              SelectionChanged="TextBox_SelectionChanged"
                              />
-                 </DataTemplate>
+                </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
     </DockPanel>

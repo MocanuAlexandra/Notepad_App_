@@ -36,7 +36,7 @@ namespace Notepad
             mainWindow = this;
             mainVM = DataContext as MainViewModel;
 
-            FileModel textFile = new FileModel(@"..\..\Some files\Machiavelli-ThePrince.txt");
+            FileModel textFile = new FileModel(@"..\..\Exemple files\Machiavelli-ThePrince.txt");
             mainVM.openFiles.Add(textFile);
 
         }
