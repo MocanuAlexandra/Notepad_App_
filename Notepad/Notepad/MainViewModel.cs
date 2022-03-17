@@ -19,20 +19,19 @@ namespace Notepad.View_Models
         public ICommand OpenCommand { get; }
         public ICommand SaveFileCommand { get; }
         public ICommand SaveAsCommand { get; }
-        public ICommand CloseFileCommand { get; }
         public ICommand ExitCommand { get; }
 
 
         // Search Menu commands:
         public ICommand FindCommand { get; }
         public ICommand ReplaceCommand { get; }
-
         public ICommand ReplaceAllCommand { get; }
 
 
         // Edit Menu commands:
         public ICommand CopyCommand { get; }
         public ICommand PasteCommand { get; }
+        public ICommand CutCommand { get; }
 
 
         // About Menu commands:
@@ -48,7 +47,6 @@ namespace Notepad.View_Models
             OpenCommand = new RelayCommand(OpenFile);
             SaveFileCommand = new RelayCommand(SaveFile);
             SaveAsCommand = new RelayCommand(SaveFileAs);
-            CloseFileCommand = new RelayCommand(CloseFile);
             ExitCommand = new RelayCommand(Exit);
 
             FindCommand = new RelayCommand(Find);
@@ -57,12 +55,13 @@ namespace Notepad.View_Models
 
             CopyCommand = new RelayCommand(Copy);
             PasteCommand = new RelayCommand(Paste);
+            CutCommand = new RelayCommand(Cut);
 
             AboutCommand = new RelayCommand(DisplayAbout);
         }
 
         #region File Menu Events
-        public void NewFile()
+        public void NewFile(object obj)
         {
             _document = new FileModel(string.Empty)
             {
@@ -74,7 +73,7 @@ namespace Notepad.View_Models
             openFiles.Add(_document);
         }
 
-        public void OpenFile()
+        public void OpenFile(object obj)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -84,13 +83,13 @@ namespace Notepad.View_Models
             }
         }
 
-        public void SaveFile()
+        public void SaveFile(object obj)
         {
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
 
             if (!File.Exists(selectedFile.FilePath))
             {
-                SaveFileAs();
+                SaveFileAs(obj);
             }
             else
             {
@@ -98,7 +97,7 @@ namespace Notepad.View_Models
             }
         }
 
-        private void SaveFileAs()
+        private void SaveFileAs(object obj)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -123,21 +122,7 @@ namespace Notepad.View_Models
             }
         }
 
-        private void CloseFile()
-        {
-            FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
-
-            if (selectedFile != null)
-            {
-                openFiles.Remove(selectedFile);
-            }
-            else
-            {
-                MessageBox.Show("No file selected!");
-            }
-        }
-
-        private void Exit()
+        private void Exit(object obj)
         {
             Application.Current.Shutdown();
         }
@@ -145,19 +130,19 @@ namespace Notepad.View_Models
         #endregion
 
         #region Search Menu Events
-        private void Find()
+        private void Find(object obj)
         {
             FindWindow findWindow = new FindWindow();
             findWindow.Show();
         }
 
-        private void Replace()
+        private void Replace(object obj)
         {
             ReplaceWindow replaceWindow = new ReplaceWindow(false);
             replaceWindow.Show();
         }
 
-        private void ReplaceAll()
+        private void ReplaceAll(object obj)
         {
             ReplaceWindow replaceWindow = new ReplaceWindow(true);
             replaceWindow.Show();
@@ -166,22 +151,47 @@ namespace Notepad.View_Models
         #endregion
 
         #region Edit Menu Events
-        private void Copy()
+        private void Copy(object obj)
         {
+            Clipboard.SetText(obj.ToString());
+        }
+        private void Paste(object obj)
+        {
+            // get the text from clipboard  
+            string textToPaste = Clipboard.GetText();
+            TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            int caretPositon = visibleTextBox.CaretIndex;
+
+            // concatenate the text from selected file with text from clipboard
+            // startIndex to insert is caretPosition
+            FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
+            selectedFile.Text = selectedFile.Text.Insert(caretPositon, textToPaste);
 
         }
-        private void Paste()
-        {
 
+        private void Cut(object obj)
+        {
+            // set the text to clipboard
+            string textToCut = obj.ToString();
+            Clipboard.SetText(textToCut);
+
+            TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            int caretPositon = visibleTextBox.CaretIndex;
+
+            // remove textToCut from slectedFile.Text 
+            // startIndex to remove is caretPosition
+            FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
+            selectedFile.Text = selectedFile.Text.Remove(caretPositon, textToCut.Length);
         }
         #endregion
 
         #region Help Menu Events
-        private void DisplayAbout()
+        private void DisplayAbout(object obj)
         {
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.Show();
         }
         #endregion
+
     }
 }

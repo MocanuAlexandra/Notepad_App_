@@ -18,15 +18,21 @@
         <KeyBinding Key="O" Modifiers="Control" Command ="{Binding OpenCommand}"/>
         <KeyBinding Key="S" Modifiers="Control" Command ="{Binding SaveFileCommand}"/>
         <KeyBinding Key="D" Modifiers="Control" Command ="{Binding SaveAsCommand}"/>
-        <KeyBinding Key="T" Modifiers="Control" Command ="{Binding CloseFileCommand}"/>
-        <KeyBinding Key="E" Modifiers="Control" Command="{Binding ExitCommand}"/>
-        <KeyBinding Key="F" Modifiers="Control" Command="{Binding FindCommand}"/>
-        <KeyBinding Key="R" Modifiers="Control" Command="{Binding ReplaceCommand}"/>
+        <KeyBinding Key="E" Modifiers="Control" Command ="{Binding ExitCommand}"/>
+        
+        <KeyBinding Key="F" Modifiers="Control" Command ="{Binding FindCommand}"/>
+        <KeyBinding Key="R" Modifiers="Control" Command ="{Binding ReplaceCommand}"/>
         <KeyBinding Key="L" Modifiers="Control" Command="{Binding ReplaceAllCommand}"/>
+
+        <KeyBinding Key="C" Modifiers="Control" Command="{Binding CopyCommand}"/>
+        <KeyBinding Key="V" Modifiers="Control" Command="{Binding PasteCommand}"/>
+        <KeyBinding Key="X" Modifiers="Control" Command="{Binding CutCommand}"/>
+
+        <KeyBinding Key="A" Modifiers="Control" Command="{Binding AboutCommand}"/>
     </Window.InputBindings>
 
-    <DockPanel Margin="1" Background="LightGray">
-        <Menu Height="20" DockPanel.Dock="Top">
+    <DockPanel Margin="1">
+        <Menu Height="20" DockPanel.Dock="Top" Background="LightGoldenrodYellow">
             <MenuItem Header="File" Height="20">
                 <MenuItem Header="New" InputGestureText="Ctrl+N" Command ="{Binding NewFileCommand}">
                 </MenuItem>
@@ -35,8 +41,6 @@
                 <MenuItem Header="Save" InputGestureText="Ctrl+S" Command ="{Binding SaveFileCommand}">
                 </MenuItem>
                 <MenuItem Header="Save As" InputGestureText="Ctrl+D" Command ="{Binding SaveAsCommand}">
-                </MenuItem>
-                <MenuItem Header="Close Tab" InputGestureText="Ctrl+T" Command ="{Binding CloseFileCommand}">
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" InputGestureText="Ctrl+E" Command="{Binding ExitCommand}">
@@ -50,13 +54,14 @@
             </MenuItem>
 
             <MenuItem Header="Edit">
-                <MenuItem Header="Copy" InputGestureText="Ctrl+C"  Command="{Binding CopyCommand}"/>
-                <MenuItem Header="Peste" InputGestureText="Ctrl+V" Command="{Binding PasteCommand}"/>
-                <MenuItem Header="Cut" InputGestureText="Ctrl+X" />
+                <MenuItem Header="Copy" InputGestureText="Ctrl+C"  Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=tabControl, Path=SelectedItem.SelectedTextFile}"/>
+                <MenuItem Header="Peste" InputGestureText="Ctrl+V" Command="{Binding PasteCommand}" CommandParameter="{Binding ElementName=tabControl, Path=SelectedItem.SelectedTextFile}"/>
+                <MenuItem Header="Cut" InputGestureText="Ctrl+X"   Command="{Binding CutCommand}"   CommandParameter="{Binding ElementName=tabControl, Path=SelectedItem.SelectedTextFile}"/>
+                <Separator />
             </MenuItem>
 
             <MenuItem Header="Help" >
-                <MenuItem Header="About" Command="{Binding AboutCommand}"/>
+                <MenuItem Header="About" InputGestureText="Ctrl+A" Command="{Binding AboutCommand}"/>
             </MenuItem>
         </Menu>
 
@@ -76,7 +81,7 @@
 
             <TabControl.ContentTemplate>
                 <DataTemplate DataType="{x:Type models:FileModel}">
-                    <TextBox Name="textBlock" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    <TextBox Name="textBox" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                              BorderThickness="0" 
                              HorizontalScrollBarVisibility="Auto" 
                              VerticalScrollBarVisibility="Auto"
@@ -84,8 +89,9 @@
                              AcceptsTab="True"
                              IsInactiveSelectionHighlightEnabled="True"
                              SelectionBrush="Black"
+                             SelectionChanged="TextBox_SelectionChanged"
                              />
-                </DataTemplate>
+                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
     </DockPanel>

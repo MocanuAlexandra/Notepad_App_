@@ -27,6 +27,7 @@ namespace Notepad
     {
         public static MainWindow mainWindow;
         public static MainViewModel mainVM;
+        string selectedString = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -66,7 +67,7 @@ namespace Notepad
         }
         #endregion
 
-        #region Auxilliary Methods
+        #region Auxilliary Tab Methods
         public void ChangeTab(int tabIndex)
         {
             tabControl.SelectedIndex = tabIndex;
@@ -97,6 +98,15 @@ namespace Notepad
                 ChangeTab(tabControl.SelectedIndex - 1);
         }
         #endregion
-         
+
+        #region Text Edit Auxiliary Methods 
+        private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            selectedString = (sender as TextBox).SelectedText;
+            FileModel selectedFile = tabControl.SelectedItem as FileModel;
+            selectedFile.SelectedTextFile = selectedString;
+        }
+
+        #endregion
     }
 }
