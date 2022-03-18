@@ -1,7 +1,9 @@
 ﻿using Microsoft.Win32;
 using Notepad.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -35,6 +37,7 @@ namespace Notepad.View_Models
         public ICommand CutCommand { get; }
         public ICommand LowercaseCommand { get; }
         public ICommand UppercaseCommand { get; }
+        public ICommand RemoveEmptyLinesCommand { get; }
 
 
         // About Menu commands:
@@ -59,6 +62,7 @@ namespace Notepad.View_Models
             CutCommand = new RelayCommand(Cut);
             LowercaseCommand = new RelayCommand(Lowercase);
             UppercaseCommand = new RelayCommand(Uppercase);
+            RemoveEmptyLinesCommand = new RelayCommand(RemoveEmptyLines);
 
 
             AboutCommand = new RelayCommand(DisplayAbout);
@@ -221,6 +225,14 @@ namespace Notepad.View_Models
             selectedFile.Text = selectedFile.Text.Insert(caretPositon, modifiedText);
         }
 
+        private void RemoveEmptyLines(object obj)
+        {
+            string textToModify = obj.ToString();
+            string newText = Regex.Replace(textToModify, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
+
+            FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
+            selectedFile.Text = newText;
+        }
         #endregion
 
         #region Help Menu Events

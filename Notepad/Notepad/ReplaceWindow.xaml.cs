@@ -37,7 +37,7 @@ namespace Notepad
           
             //check if strings are empty or there is no file open in tab
             if (textToBeReplaced == string.Empty || replacementText == string.Empty ||
-                MainWindow.mainVM.openFiles.Count == 0)
+                MainWindow.mainViewModel.openFiles.Count == 0)
                 return;
 
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel; //get the current File Model object
@@ -53,7 +53,7 @@ namespace Notepad
                 TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
 
                 //iterating through all files, searching for the text
-                for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainVM.openFiles.Count; searchedFilesCount++)
+                for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainViewModel.openFiles.Count; searchedFilesCount++)
                 {
                     //finding the first position of the text that needs to be replaced
                     int posIndex = Utility.FindNext(textToBeReplaced, selectedFile, visibleTextBox, false);
@@ -105,14 +105,14 @@ namespace Notepad
 
             //check if strings are empty or there is no file open in tab
             if (textToBeReplaced == string.Empty || replacementText == string.Empty ||
-                MainWindow.mainVM.openFiles.Count == 0)
+                MainWindow.mainViewModel.openFiles.Count == 0)
                 return;
 
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel; //get the current FileModel object
 
             if (allFiles.IsChecked.Value) //checking all files for first occurance to replace
             {
-                foreach (FileModel file in MainWindow.mainVM.openFiles)
+                foreach (FileModel file in MainWindow.mainViewModel.openFiles)
                     file.Text = Regex.Replace(file.Text, textToBeReplaced, replacementText, RegexOptions.IgnoreCase);
             }
             else //else we only need to replace all text in just the selected file

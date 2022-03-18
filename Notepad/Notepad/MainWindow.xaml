@@ -121,6 +121,16 @@
                         <Image Source="pack://application:,,,/Icons/uppercase.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                
+                <Separator />
+                
+                <MenuItem Header="Remove empty lines" Command="{Binding RemoveEmptyLinesCommand}" 
+                      CommandParameter="{Binding ElementName=tabControl,
+                                        Path=SelectedItem.Text}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/remove_empty_lines.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Help" >
@@ -157,6 +167,8 @@
                              IsInactiveSelectionHighlightEnabled="True"
                              SelectionBrush="Black"
                              SelectionChanged="TextBox_SelectionChanged"
+                             IsReadOnly="False"
+                          
                              />
                 </DataTemplate>
             </TabControl.ContentTemplate>

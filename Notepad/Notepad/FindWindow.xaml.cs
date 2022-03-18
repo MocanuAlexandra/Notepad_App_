@@ -42,7 +42,7 @@ namespace Notepad
             //making sure that a tab is selected before beginning the search
             if (selectedFile == null)
             {
-                if (MainWindow.mainVM.openFiles.Count == 0)
+                if (MainWindow.mainViewModel.openFiles.Count == 0)
                     return;
 
                 MainWindow.mainWindow.ChangeTab(0);
@@ -61,7 +61,7 @@ namespace Notepad
                 else
                 {
                     //iterating through all files once, searching for the text
-                    for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainVM.openFiles.Count; searchedFilesCount++)
+                    for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainViewModel.openFiles.Count; searchedFilesCount++)
                     {
                         if (Utility.FindNext(searchedText, selectedFile, visibleTextBox, false) == -1)
                         {
@@ -87,7 +87,7 @@ namespace Notepad
                 else
                 {
                     //iterating through all files once, searching for the text
-                    for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainVM.openFiles.Count; searchedFilesCount++)
+                    for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainViewModel.openFiles.Count; searchedFilesCount++)
                     {
                         if (Utility.FindPrevious(searchedText, selectedFile, visibleTextBox, false) == -1)
                         {

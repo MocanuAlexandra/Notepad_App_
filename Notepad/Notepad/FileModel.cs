@@ -12,6 +12,7 @@ namespace Notepad.Models
         private string _text;
         private string _filePath;
         private string _selectedTextFile;
+
         public string Text
         {
             get => _text;
@@ -26,12 +27,15 @@ namespace Notepad.Models
         {
             get => _selectedTextFile;
             set => OnPropertyChange(ref _selectedTextFile, value);
+
         }
         public FileModel(string FilePath)
         {
             _filePath = FilePath;
             ReadFile();
         }
+
+
         public string Name => Path.GetFileName(FilePath);
 
         public void WriteFile()

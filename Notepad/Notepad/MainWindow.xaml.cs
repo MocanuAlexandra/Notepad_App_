@@ -26,18 +26,18 @@ namespace Notepad
     public partial class MainWindow : Window
     {
         public static MainWindow mainWindow;
-        public static MainViewModel mainVM;
-        string selectedString = null;
+        public static MainViewModel mainViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
             DirManager.FileExplorer.InitFileExplorer(fileExplorer);
 
             mainWindow = this;
-            mainVM = DataContext as MainViewModel;
+            mainViewModel = DataContext as MainViewModel;
 
             FileModel textFile = new FileModel(@"..\..\Exemple files\Machiavelli-ThePrince.txt");
-            mainVM.openFiles.Add(textFile);
+            mainViewModel.openFiles.Add(textFile);
 
         }
 
@@ -47,11 +47,11 @@ namespace Notepad
             Button closeBtn = sender as Button;
 
             //find the FileModel object that is responsible for the tab to be closed
-            foreach (FileModel file in mainVM.openFiles)
+            foreach (FileModel file in mainViewModel.openFiles)
             {
                 if (file.FilePath == closeBtn.Tag.ToString())
                 {
-                    mainVM.openFiles.Remove(file);
+                    mainViewModel.openFiles.Remove(file);
                     break;
                 }
             }
@@ -77,10 +77,10 @@ namespace Notepad
         //changes tab to the next one in indexing order
         public void NextTab(bool wrapAround = true)
         {
-            if (mainVM.openFiles.Count == 0)
+            if (mainViewModel.openFiles.Count == 0)
                 return;
 
-            if (tabControl.SelectedIndex == mainVM.openFiles.Count - 1 && wrapAround)
+            if (tabControl.SelectedIndex == mainViewModel.openFiles.Count - 1 && wrapAround)
                 ChangeTab(0);
             else
                 ChangeTab(tabControl.SelectedIndex + 1);
@@ -89,23 +89,24 @@ namespace Notepad
         //changes tab to the previous one in indexing order
         public void PrevTab(bool wrapAround = true)
         {
-            if (mainVM.openFiles.Count == 0)
+            if (mainViewModel.openFiles.Count == 0)
                 return;
 
             if (tabControl.SelectedIndex == 0 && wrapAround)
-                ChangeTab(mainVM.openFiles.Count - 1);
+                ChangeTab(mainViewModel.openFiles.Count - 1);
             else
                 ChangeTab(tabControl.SelectedIndex - 1);
         }
         #endregion
 
-        #region Text Edit Auxiliary Methods 
+        #region Auxiliary Text Edit Methods 
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            selectedString = (sender as TextBox).SelectedText;
+            string selectedString = (sender as TextBox).SelectedText;
             FileModel selectedFile = tabControl.SelectedItem as FileModel;
             selectedFile.SelectedTextFile = selectedString;
         }
+       
 
         #endregion
     }
