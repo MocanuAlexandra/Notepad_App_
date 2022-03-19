@@ -3,6 +3,7 @@ using Notepad.View_Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,27 @@ namespace Notepad
 
         }
 
-        #region TabControl Events
+        #region FileExplorer Events
+        private void TreeViewItem_Expanded(object sender, RoutedEventArgs e)
+        {
+            //when the tree is expanded, explore the new children
+            TreeViewItem item = e.OriginalSource as TreeViewItem;
+            DirManager.FileExplorer.ExploreChildren(item);
+        }
+
+        private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            TreeViewItem item = fileExplorer.SelectedItem as TreeViewItem;
+            string filePath = item.Tag.ToString();
+            FileAttributes attributes = File.GetAttributes(filePath);
+
+            //check if the user double clicked on file and if yes, open the file
+            if ((attributes & FileAttributes.Directory) != FileAttributes.Directory)
+                mainViewModel.openFiles.Add(new FileModel(filePath));
+        }
+        #endregion
+
+        #region Auxilliary Tab Methods
         private void CloseTab(object sender, RoutedEventArgs e)
         {
             Button closeBtn = sender as Button;
@@ -51,23 +72,29 @@ namespace Notepad
             {
                 if (file.FilePath == closeBtn.Tag.ToString())
                 {
-                    mainViewModel.openFiles.Remove(file);
+                    if (file.HasChanged)
+                    {
+                        MessageBoxResult result = MessageBox.Show("The file you are trying to close has been modified. " +
+                           "All changes will be lost, continue?\n",
+                           "Warning!",
+                           MessageBoxButton.YesNo);
+
+                        switch (result)
+                        {
+                            case MessageBoxResult.Yes:
+                                mainViewModel.openFiles.Remove(file);
+                                return;
+                            case MessageBoxResult.No:
+                                return;
+                        }
+                    }
+                    else
+                        mainViewModel.openFiles.Remove(file);
+
                     break;
                 }
             }
         }
-        #endregion
-
-        #region FileExplorer Events
-        private void TreeViewItem_Expanded(object sender, RoutedEventArgs e)
-        {
-            //when the tree is expanded, explore the new children
-            TreeViewItem item = e.OriginalSource as TreeViewItem;
-            DirManager.FileExplorer.ExploreChildren(item);
-        }
-        #endregion
-
-        #region Auxilliary Tab Methods
         public void ChangeTab(int tabIndex)
         {
             tabControl.SelectedIndex = tabIndex;
@@ -97,17 +124,17 @@ namespace Notepad
             else
                 ChangeTab(tabControl.SelectedIndex - 1);
         }
-        #endregion
 
-        #region Auxiliary Text Edit Methods 
+        //auxiliary text edit method
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            string selectedString = (sender as TextBox).SelectedText;
-            FileModel selectedFile = tabControl.SelectedItem as FileModel;
-            selectedFile.SelectedTextFile = selectedString;
+            if (tabControl.Items.Count > 1)
+            {
+                string selectedString = (sender as TextBox).SelectedText;
+                FileModel selectedFile = tabControl.SelectedItem as FileModel;
+                selectedFile.SelectedTextFile = selectedString;
+            }
         }
-       
-
         #endregion
     }
 }

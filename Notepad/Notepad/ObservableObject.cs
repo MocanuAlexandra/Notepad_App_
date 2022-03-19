@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Notepad.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Notepad
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
+                PropertyChanged(this, new PropertyChangedEventArgs(name));              
             }
         }
     }

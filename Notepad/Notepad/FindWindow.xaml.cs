@@ -37,7 +37,7 @@ namespace Notepad
             }
             searchedText = searchedText.ToLower();
 
-            FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel; //get the current File object
+            FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel; //get the current FileModel object
 
             //making sure that a tab is selected before beginning the search
             if (selectedFile == null)
@@ -50,24 +50,24 @@ namespace Notepad
             }
 
             //needed for caret position and displaying the found text position
-            TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            TextBox visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
             Button senderButton = sender as Button;
             if (senderButton.Tag.ToString() == "next")
             {
                 if (!allFiles.IsChecked.Value)
                 {
-                    Utility.FindNext(searchedText, selectedFile, visibleTextBox);
+                    Utils.FindNext(searchedText, selectedFile, visibleTextBox);
                 }
                 else
                 {
                     //iterating through all files once, searching for the text
                     for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainViewModel.openFiles.Count; searchedFilesCount++)
                     {
-                        if (Utility.FindNext(searchedText, selectedFile, visibleTextBox, false) == -1)
+                        if (Utils.FindNext(searchedText, selectedFile, visibleTextBox, false) == -1)
                         {
                             MainWindow.mainWindow.NextTab();
                             selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
-                            visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+                            visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
                         }
                         else
                         {
@@ -82,18 +82,18 @@ namespace Notepad
             {
                 if (!allFiles.IsChecked.Value)
                 {
-                    Utility.FindPrevious(searchedText, selectedFile, visibleTextBox);
+                    Utils.FindPrevious(searchedText, selectedFile, visibleTextBox);
                 }
                 else
                 {
                     //iterating through all files once, searching for the text
                     for (int searchedFilesCount = 0; searchedFilesCount <= MainWindow.mainViewModel.openFiles.Count; searchedFilesCount++)
                     {
-                        if (Utility.FindPrevious(searchedText, selectedFile, visibleTextBox, false) == -1)
+                        if (Utils.FindPrevious(searchedText, selectedFile, visibleTextBox, false) == -1)
                         {
                             MainWindow.mainWindow.PrevTab();
                             selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
-                            visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+                            visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
                         }
                         else
                         {

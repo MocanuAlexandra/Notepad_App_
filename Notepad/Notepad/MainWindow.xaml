@@ -131,6 +131,12 @@
                         <Image Source="pack://application:,,,/Icons/remove_empty_lines.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
+
+                <!--<MenuItem Header="Read Only" Command="{Binding ReadOnlyCommand}" 
+                      CommandParameter="{Binding ElementName=tabControl,
+                                        Path=SelectedItem.Text}"
+                                        IsCheckable="True">
+                </MenuItem>-->
             </MenuItem>
 
             <MenuItem Header="Help" >
@@ -143,15 +149,33 @@
         </Menu>
 
         <TreeView x:Name="fileExplorer" DockPanel.Dock="Left" Width="173" 
-                  TreeViewItem.Expanded="TreeViewItem_Expanded" Margin="0,0,0,0.4"
+                  TreeViewItem.Expanded="TreeViewItem_Expanded" 
+                  MouseDoubleClick="TreeViewItem_MouseDoubleClick"
+                  Margin="0,0,0,0.4"
                  />
 
         <TabControl DockPanel.Dock="Top" ItemsSource ="{Binding openFiles}" Name="tabControl">
             <TabControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:FileModel}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode = OneWay}"/>
-                        <Button Background="Purple" Height="10" Width="10" Margin="3" Click="CloseTab" Tag="{Binding FilePath}"/>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                            <!-- we setup a trigger that notifies if the file has changed, 
+                            and changes the font of the file name if it has indeed changed-->
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasChanged, UpdateSourceTrigger = PropertyChanged}" Value="True">
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <Button Height="13" Width="13" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Margin="5, 3, 0, 0" Click="CloseTab" Tag="{Binding FilePath}">
+                            <Image Source="pack://application:,,,/Icons/close.png"/>
+                        </Button>
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
@@ -167,8 +191,7 @@
                              IsInactiveSelectionHighlightEnabled="True"
                              SelectionBrush="Black"
                              SelectionChanged="TextBox_SelectionChanged"
-                             IsReadOnly="False"
-                          
+                             IsReadOnly="False"                         
                              />
                 </DataTemplate>
             </TabControl.ContentTemplate>

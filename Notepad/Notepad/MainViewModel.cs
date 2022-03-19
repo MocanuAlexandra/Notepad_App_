@@ -14,7 +14,7 @@ namespace Notepad.View_Models
 {
     public class MainViewModel
     {
-        // counter for new files
+        // Counter for new files
         private int newFiles = 0;
 
         // File Menu commands:
@@ -64,7 +64,6 @@ namespace Notepad.View_Models
             UppercaseCommand = new RelayCommand(Uppercase);
             RemoveEmptyLinesCommand = new RelayCommand(RemoveEmptyLines);
 
-
             AboutCommand = new RelayCommand(DisplayAbout);
         }
 
@@ -89,6 +88,9 @@ namespace Notepad.View_Models
         {
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
 
+            if (selectedFile == null)
+                return;
+
             if (!File.Exists(selectedFile.FilePath))
             {
                 SaveFileAs(obj);
@@ -103,7 +105,8 @@ namespace Notepad.View_Models
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "Text File (*.txt)|*.txt",
+                DefaultExt = ".txt",
+                Filter = "Text documents (*.txt)|*.txt",
                 Title = "Save Text File"
             };
 
@@ -162,7 +165,7 @@ namespace Notepad.View_Models
         {
             // get the text from clipboard  
             string textToPaste = Clipboard.GetText();
-            TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            TextBox visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
             int caretPositon = visibleTextBox.CaretIndex;
 
             // concatenate the text from selected file with text from clipboard
@@ -178,7 +181,7 @@ namespace Notepad.View_Models
             string textToCut = obj.ToString();
             Clipboard.SetText(textToCut);
 
-            TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            TextBox visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
             int caretPositon = visibleTextBox.CaretIndex;
 
             // remove textToCut from slectedFile.Text 
@@ -197,7 +200,7 @@ namespace Notepad.View_Models
             string modifiedText = textToModify.ToLower();
 
             // cut original text
-            TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            TextBox visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
             int caretPositon = visibleTextBox.CaretIndex;
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
             selectedFile.Text = selectedFile.Text.Remove(caretPositon, textToModify.Length);
@@ -216,7 +219,7 @@ namespace Notepad.View_Models
             string modifiedText = textToModify.ToUpper();
 
             // cut original text
-            TextBox visibleTextBox = Utility.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            TextBox visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
             int caretPositon = visibleTextBox.CaretIndex;
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
             selectedFile.Text = selectedFile.Text.Remove(caretPositon, textToModify.Length);
@@ -233,6 +236,7 @@ namespace Notepad.View_Models
             FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
             selectedFile.Text = newText;
         }
+
         #endregion
 
         #region Help Menu Events
