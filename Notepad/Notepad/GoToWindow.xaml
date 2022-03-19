@@ -1,0 +1,23 @@
+﻿<Window x:Class="Notepad.GoToWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notepad"
+        mc:Ignorable="d"
+        Title="Go to line" Height="154" Width="358">
+
+    <Grid Margin="0,-13,-6.2,-19.8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="184*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" Margin="0,22,0,34" Width="347">
+            <Label Content="Go to line:  " FontSize="16" VerticalAlignment="Top" Height="71" Margin="0,13,0,0"/>
+            <TextBox FontSize="16" Height="28" x:Name="textBox" VerticalAlignment="Top" Margin="97,20,25,0"/>
+
+            <Button Content="Go" Tag="next"  Height="22"  VerticalAlignment="Top" Margin="97,58,25,0"
+                     Click="GoTo_Click"/>
+        </Grid>
+    </Grid>
+</Window>

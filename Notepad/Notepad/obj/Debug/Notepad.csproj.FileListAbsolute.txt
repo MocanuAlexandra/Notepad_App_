@@ -132,3 +132,5 @@ D:\Facultate\anul II\sem 2\MVP\Notepad_App_.git\Notepad\Notepad\obj\Debug\Notepa
 D:\Facultate\anul II\sem 2\MVP\Notepad_App_.git\Notepad\Notepad\obj\Debug\ReplaceWindow.g.cs
 D:\Facultate\anul II\sem 2\MVP\Notepad_App_.git\Notepad\Notepad\obj\Debug\ReplaceWindow.baml
 D:\Facultate\anul II\sem 2\MVP\Notepad_App_.git\Notepad\Notepad\obj\Debug\Notepad.csproj.SuggestedBindingRedirects.cache
+D:\Facultate\anul II\sem 2\MVP\Notepad_App_.git\Notepad\Notepad\obj\Debug\GoToWindow.g.cs
+D:\Facultate\anul II\sem 2\MVP\Notepad_App_.git\Notepad\Notepad\obj\Debug\GoToWindow.baml
