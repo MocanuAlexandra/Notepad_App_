@@ -128,12 +128,14 @@ namespace Notepad
         //auxiliary text edit method
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (tabControl.Items.Count > 1)
+            if (tabControl.Items.Count >= 1)
+
             {
                 string selectedString = (sender as TextBox).SelectedText;
                 FileModel selectedFile = tabControl.SelectedItem as FileModel;
                 selectedFile.SelectedTextFile = selectedString;
             }
+
         }
         #endregion
     }

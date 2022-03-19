@@ -155,5 +155,8 @@
   <ItemGroup>
     <Resource Include="Icons\replace_all.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\goto.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

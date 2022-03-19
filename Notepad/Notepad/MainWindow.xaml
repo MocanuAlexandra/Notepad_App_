@@ -32,7 +32,7 @@
     </Window.InputBindings>
 
     <DockPanel Margin="1">
-        <Menu Height="20" DockPanel.Dock="Top" Background="LightGoldenrodYellow">
+        <Menu Height="20" DockPanel.Dock="Top" Background="LightGray" Width="799">
             <MenuItem Header="File" Height="20">
                 <MenuItem Header="New" InputGestureText="Ctrl+N" Command ="{Binding NewFileCommand}">
                     <MenuItem.Icon>
@@ -132,10 +132,10 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Header="Go to line" Command="{Binding GoToCommand}">
-                    <!--<MenuItem.Icon>
-                        <Image Source="pack://application:,,,/Icons/remove_empty_lines.png"/>
-                    </MenuItem.Icon>-->
+                <MenuItem Header="Go to line" Command="{Binding GoToLineCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Icons/goto.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
 
                 <!--<MenuItem Header="Read Only" Command="{Binding ReadOnlyCommand}" 
@@ -154,12 +154,111 @@
             </MenuItem>
         </Menu>
 
+
+        <Grid DockPanel.Dock="Top" Height="22" Background="LightGray" Margin="0,0,0,0" Width="785">
+            <Button Name="NewFileButton" Width="20" HorizontalAlignment="Left" Command="{Binding NewFileCommand}"
+                    BorderBrush="#FFDDDDDD" ToolTip="New File">
+                <Image Source="pack://application:,,,/Icons/new.png"/>
+            </Button>
+            
+            <Button Name="OpenButton" Width="20" Margin="20,0,0,0" HorizontalAlignment="Left" Command="{Binding OpenCommand}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Open">
+                <Image Source="pack://application:,,,/Icons/open.png"/>
+            </Button>
+            
+            <Button Name="SaveButton" Width="20" Margin="40,0,0,0" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}"
+
+                    BorderBrush="#FFDDDDDD" ToolTip="Save">
+                <Image Source="pack://application:,,,/Icons/save.png"/>
+            </Button>
+            
+            <Button Name="SaveAsButton" Width="20" Margin="60,0,0,0" HorizontalAlignment="Left" Command="{Binding SaveAsCommand}" 
+                    BorderBrush="#FFDDDDDD" ToolTip="Save As">
+                <Image Source="pack://application:,,,/Icons/save_as.png"/>
+            </Button>
+            
+            <Line  X1="0" X2="0" Y1="0" Y2="20" Stroke="Black" StrokeThickness="0.5" Margin="85,0,0,0"/>
+            
+            <Button Name="FindButton" Width="20" Margin="90,0,0,0" HorizontalAlignment="Left" Command="{Binding FindCommand}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Find">
+                <Image Source="pack://application:,,,/Icons/find.png"/>
+            </Button>
+            
+            <Button Name="ReplaceButton" Width="20" Margin="112,0,0,0" HorizontalAlignment="Left" Command="{Binding ReplaceCommand}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Replace">
+                <Image Source="pack://application:,,,/Icons/replace.png"/>
+            </Button>
+            
+            <Button Name="ReplaceAllButton" Width="20" Margin="134,0,0,0" HorizontalAlignment="Left" Command="{Binding ReplaceAllCommand}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Replace All" RenderTransformOrigin="1.17,0.584" >
+                <Image Source="pack://application:,,,/Icons/replace_all.png"/>
+            </Button>
+            
+            <Line  X1="0" X2="0" Y1="0" Y2="20" Stroke="Black" StrokeThickness="0.5" Margin="157,0,0,0"/>
+            
+            <Button Name="CopyButton" Width="20" Margin="160,0,0,0" HorizontalAlignment="Left" Command="{Binding CopyCommand}" 
+                    CommandParameter="{Binding ElementName=tabControl,
+                                            Path=SelectedItem.SelectedTextFile}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Copy">
+                <Image Source="pack://application:,,,/Icons/copy.png"/>
+            </Button>
+            
+            <Button Name="PasteButton" Width="20" Margin="182,0,0,0" HorizontalAlignment="Left" Command="{Binding PasteCommand}"
+                    CommandParameter="{Binding ElementName=tabControl,
+                                            Path=SelectedItem.SelectedTextFile}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Paste">
+                <Image Source="pack://application:,,,/Icons/paste.png"/>
+            </Button>
+            
+            <Button Name="CutButton" Width="20" Margin="204,0,0,0" HorizontalAlignment="Left" Command="{Binding CutCommand}"
+                    CommandParameter="{Binding ElementName=tabControl,
+                                            Path=SelectedItem.SelectedTextFile}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Cut">
+                <Image Source="pack://application:,,,/Icons/cut.png"/>
+            </Button>
+            
+            <Line  X1="0" X2="0" Y1="0" Y2="20" Stroke="Black" StrokeThickness="0.5" Margin="225,0,0,0"/>
+
+            <Button Name="LowercaseButton" Width="20" Margin="226,0,0,0" HorizontalAlignment="Left" Command="{Binding LowercaseCommand}"
+                    CommandParameter="{Binding ElementName=tabControl,
+                                            Path=SelectedItem.SelectedTextFile}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Convert to Lowercase">
+                <Image Source="pack://application:,,,/Icons/lowercase.png"/>
+            </Button>
+            
+            <Button Name="UppercaseButton" Width="20" Margin="248,0,0,0" HorizontalAlignment="Left" Command="{Binding UppercaseCommand}" 
+                    CommandParameter="{Binding ElementName=tabControl,
+                                            Path=SelectedItem.SelectedTextFile}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Convert to Uppercase">
+                <Image Source="pack://application:,,,/Icons/uppercase.png"/>
+            </Button>
+            
+            <Line  X1="0" X2="0" Y1="0" Y2="20" Stroke="Black" StrokeThickness="0.5" Margin="272,0,0,0"/>
+            
+            <Button Name="RemoveEmptyLinesButton" Width="20" Margin="276,0,0,0" HorizontalAlignment="Left" Command="{Binding RemoveEmptyLinesCommand}"
+                    CommandParameter="{Binding ElementName=tabControl,
+                                        Path=SelectedItem.Text}"
+                    BorderBrush="#FFDDDDDD" ToolTip="Remove empty lines">
+                <Image Source="pack://application:,,,/Icons/remove_empty_lines.png"/>
+            </Button>
+            
+            <Button Name="GoToButton" Width="20" Margin="298,0,0,0" HorizontalAlignment="Left" Command="{Binding GoToLineCommand}" 
+                    BorderBrush="#FFDDDDDD" ToolTip="Go to line">
+                <Image Source="pack://application:,,,/Icons/goto.png"/>
+            </Button>
+
+            <Button Name="AboutButton" Width="20" HorizontalAlignment="Right" Command="{Binding AboutCommand}" 
+                    BorderBrush="#FFDDDDDD" ToolTip="About">
+                <Image Source="pack://application:,,,/Icons/about.png" Width="23"/>
+            </Button>
+        </Grid>
+
         <TreeView x:Name="fileExplorer" DockPanel.Dock="Left" Width="173" 
                   TreeViewItem.Expanded="TreeViewItem_Expanded" 
                   MouseDoubleClick="TreeViewItem_MouseDoubleClick"
                   Margin="0,0,0,0.4"
                  />
-
+        
         <TabControl DockPanel.Dock="Top" ItemsSource ="{Binding openFiles}" Name="tabControl">
             <TabControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:FileModel}">

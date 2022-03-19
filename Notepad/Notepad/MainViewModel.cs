@@ -38,7 +38,7 @@ namespace Notepad.View_Models
         public ICommand LowercaseCommand { get; }
         public ICommand UppercaseCommand { get; }
         public ICommand RemoveEmptyLinesCommand { get; }
-        public ICommand GoToCommand { get; }
+        public ICommand GoToLineCommand { get; }
 
 
         // About Menu commands:
@@ -64,7 +64,7 @@ namespace Notepad.View_Models
             LowercaseCommand = new RelayCommand(Lowercase);
             UppercaseCommand = new RelayCommand(Uppercase);
             RemoveEmptyLinesCommand = new RelayCommand(RemoveEmptyLines);
-            GoToCommand = new RelayCommand(GoToLine);
+            GoToLineCommand = new RelayCommand(GoToLine);
 
             AboutCommand = new RelayCommand(DisplayAbout);
         }
@@ -162,7 +162,7 @@ namespace Notepad.View_Models
         {
             Clipboard.SetText(obj.ToString());
         }
-
+             
         private void Paste(object obj)
         {
             // get the text from clipboard  
@@ -241,10 +241,8 @@ namespace Notepad.View_Models
 
         private void GoToLine(object obj)
         {
-
             GoToWindow gotoWindow = new GoToWindow();
             gotoWindow.Show();
-
         }
         #endregion
 

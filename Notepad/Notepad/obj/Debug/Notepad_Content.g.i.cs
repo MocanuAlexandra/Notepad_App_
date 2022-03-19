@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/replace_all.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/goto.png")]
 
 
