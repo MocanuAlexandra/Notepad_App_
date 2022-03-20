@@ -28,16 +28,33 @@ namespace Notepad
         #region Event
         private void GoTo_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox.Text))
+            TextBox visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
+            if (visibleTextBox == null)
             {
+                MessageBox.Show("No tabs selected!");
                 return;
             }
 
-            int lineNumber = Int32.Parse(textBox.Text);
-            TextBox visibleTextBox = Utils.FindVisualChild<TextBox>(MainWindow.mainWindow.tabControl);
-            visibleTextBox.ScrollToLine(lineNumber);
-            visibleTextBox.CaretIndex = lineNumber;
+            int lineNumber;
+            try
+            {
+                lineNumber = Int32.Parse(textBox.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Not a valid line number!");
+                return;
+            }
+
+            if (visibleTextBox.LineCount < lineNumber)
+            {
+                MessageBox.Show("Line number does not exist in the selected file!");
+                return;
+            }
+
             visibleTextBox.Focus();
+            visibleTextBox.Select(visibleTextBox.GetCharacterIndexFromLineIndex(lineNumber), 1);
+            Focus();
         }
 
         #endregion
