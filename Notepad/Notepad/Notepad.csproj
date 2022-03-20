@@ -158,5 +158,8 @@
   <ItemGroup>
     <Resource Include="Icons\goto.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\readonly.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,7 +13,7 @@ namespace Notepad.Models
         private string _filePath;
         private string _selectedTextFile;
         private bool _hasChanged;
-
+        private bool _isReadonly;
         public string Text
         {
             get => _text;
@@ -41,6 +41,11 @@ namespace Notepad.Models
             {
                 _hasChanged = value;
             }
+        }
+        public bool IsReadonly
+        {
+            get => _isReadonly;
+            set => OnPropertyChange(ref _isReadonly, value);
         }
         public FileModel(string FilePath)
         {

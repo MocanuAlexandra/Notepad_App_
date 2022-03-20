@@ -26,11 +26,15 @@ namespace Notepad
             InitializeComponent();
         }
 
+        #region Event
+
         // open a new e-mail composition window in the user's default e-mail app
         private void Send_Email(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
+
+        #endregion
     }
 }

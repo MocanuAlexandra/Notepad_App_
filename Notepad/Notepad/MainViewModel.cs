@@ -14,60 +14,81 @@ namespace Notepad.View_Models
 {
     public class MainViewModel
     {
-        // Counter for new files
-        private int newFiles = 0;
+        #region Commands
 
-        // File Menu commands:
+        #region File Menu commands
+
         public ICommand NewFileCommand { get; }
         public ICommand OpenCommand { get; }
         public ICommand SaveFileCommand { get; }
         public ICommand SaveAsCommand { get; }
         public ICommand ExitCommand { get; }
+       
+        #endregion
 
+        #region  Search Menu commands
 
-        // Search Menu commands:
         public ICommand FindCommand { get; }
         public ICommand ReplaceCommand { get; }
         public ICommand ReplaceAllCommand { get; }
+        public ICommand GoToLineCommand { get; }
 
+        #endregion
 
-        // Edit Menu commands:
+        #region Edit Menu commands
+
         public ICommand CopyCommand { get; }
         public ICommand PasteCommand { get; }
         public ICommand CutCommand { get; }
         public ICommand LowercaseCommand { get; }
         public ICommand UppercaseCommand { get; }
         public ICommand RemoveEmptyLinesCommand { get; }
-        public ICommand GoToLineCommand { get; }
+        public ICommand ReadOnlyCommand { get; }
 
+        #endregion
 
-        // About Menu commands:
+        #region About Menu commands
         public ICommand AboutCommand { get; }
 
+        #endregion
+
+        #endregion
+
+        // Counter for new files
+        private int newFiles = 0;
+
+        // Observable collection in tabControl
         public ObservableCollection<FileModel> openFiles { get; set; } = new ObservableCollection<FileModel>();
 
         public MainViewModel()
         {
+            // ************* File Menu ************** //
             NewFileCommand = new RelayCommand(NewFile);
             OpenCommand = new RelayCommand(OpenFile);
             SaveFileCommand = new RelayCommand(SaveFile);
             SaveAsCommand = new RelayCommand(SaveFileAs);
             ExitCommand = new RelayCommand(Exit);
 
+            // ************* Search Menu ************ //
             FindCommand = new RelayCommand(Find);
             ReplaceCommand = new RelayCommand(Replace);
             ReplaceAllCommand = new RelayCommand(ReplaceAll);
+            GoToLineCommand = new RelayCommand(GoToLine);
 
+            // ************ Edit Menu **************** //
             CopyCommand = new RelayCommand(Copy);
             PasteCommand = new RelayCommand(Paste);
             CutCommand = new RelayCommand(Cut);
             LowercaseCommand = new RelayCommand(Lowercase);
             UppercaseCommand = new RelayCommand(Uppercase);
             RemoveEmptyLinesCommand = new RelayCommand(RemoveEmptyLines);
-            GoToLineCommand = new RelayCommand(GoToLine);
+            ReadOnlyCommand = new RelayCommand(ReadOnly);
 
+            // ************ About Menu **************** //
             AboutCommand = new RelayCommand(DisplayAbout);
         }
+
+        #region Events
 
         #region File Menu Events
         public void NewFile(object obj)
@@ -155,6 +176,12 @@ namespace Notepad.View_Models
             replaceWindow.Show();
         }
 
+        private void GoToLine(object obj)
+        {
+            GoToWindow gotoWindow = new GoToWindow();
+            gotoWindow.Show();
+        }
+
         #endregion
 
         #region Edit Menu Events
@@ -239,10 +266,16 @@ namespace Notepad.View_Models
             selectedFile.Text = newText;
         }
 
-        private void GoToLine(object obj)
+        private void ReadOnly(object obj)
         {
-            GoToWindow gotoWindow = new GoToWindow();
-            gotoWindow.Show();
+            bool isReadOnly = (bool)obj;
+            FileModel selectedFile = MainWindow.mainWindow.tabControl.SelectedItem as FileModel;
+            if (selectedFile == null)
+            {
+                MessageBox.Show("No file selected!");
+                return;
+            }
+            selectedFile.IsReadonly = !isReadOnly;
         }
         #endregion
 
@@ -254,5 +287,6 @@ namespace Notepad.View_Models
         }
         #endregion
 
+        #endregion
     }
 }
