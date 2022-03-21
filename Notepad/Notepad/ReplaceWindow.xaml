@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notepad"
         mc:Ignorable="d"
-        Title="Replace" Height="218.314" Width="395.714">
+        Title="Replace" Height="218.314" Width="395.714"
+        Icon="pack://application:,,,/Icons/replace.png">
+    
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="37,20,22.6,43.8" Width="330">
             <StackPanel>

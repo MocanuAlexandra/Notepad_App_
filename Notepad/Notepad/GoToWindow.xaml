@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notepad"
         mc:Ignorable="d"
-        Title="Go to line" Height="154" Width="358">
+        Title="Go to line" Height="154" Width="358"
+        Icon="pack://application:,,,/Icons/goto.png">
 
     <Grid Margin="0,-13,-6.2,-19.8">
         <Grid.RowDefinitions>

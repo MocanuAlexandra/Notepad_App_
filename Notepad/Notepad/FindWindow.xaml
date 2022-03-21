@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notepad"
         mc:Ignorable="d"
-        Title="Find" Height="220.114" Width="376.514">
-   
-    <Grid Margin="0,-13,-6.2,-19.8">
+        Title="Find" Height="220.114" Width="376.514"
+        Icon ="pack://application:,,,/Icons/find.png">
+
+<Grid Margin="0,-13,-6.2,-19.8">
         <Grid HorizontalAlignment="Center" Margin="10,37,10,34" Width="347">
             <Label Content="Find:  " FontSize="16" VerticalAlignment="Center" Height="122" Margin="0,28,0,2.2"/>
             <TextBox FontSize="16" Height="28" x:Name="textBox" VerticalAlignment="Center" Margin="42,10,25,79"/>
